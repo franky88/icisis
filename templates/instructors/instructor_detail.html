@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<hr>
+<ol class="breadcrumb">
+    <li>
+        <a href="{% url 'instructor:instructorindex' %}"><i class="fa fa-users"></i> Instructors</a>
+    </li>
+    <li class="active">
+    	<i class="fa fa-user"></i> {{title}}
+    </li>
+</ol>
+<div class="row">
+	<div class="col-sm-3">
+		<div class="text-center">
+		{% if instance.image %}
+			<img style="width: 250px; height: 250px;" src="{{instance.image.url}}" alt="" class="img-thumbnail img-responsive img-rectangle">
+		{% else %}
+			<div class="well">
+				<span class='glyphicon glyphicon-user'></span>
+			</div>
+		{% endif %}
+		</div>
+	</div>
+	<div class="col-sm-9">
+		<h2>Personal Informations</h2>
+		<hr>
+		<h3><b>{{instance.full_name|title}}</b> <small>ID Number: {{instance.id_number}}</small></h3>
+		<p><b>Birth Date: </b>{{instance.birth_date}}<br>
+		<b>Email Address: </b>{{instance.email_add}}<br>
+		<b>Contact Number: </b>{{instance.contact_number}}<br>
+		<b>Address: </b>{{instance.adddress|title}}<br>
+		<b>Gender: </b>{{instance.gender}}<br>
+		<b>Employment Status: </b>{{instance.employment_status}}<br>
+		<b>Department: </b>{{instance.department}}
+		</p>
+		<hr>
+		<a href="{% url 'instructor:edit' instance.id %}" class="btn btn-default btn-xs"><i class="fa fa-edit"></i> Edit</a>
+	</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-sm-12">
+	<ul class="nav nav-tabs">
+	  <li class="active"><a data-toggle="tab" href="#menu1">Class schedules</a></li>
+	  <li><a data-toggle="tab" href="#menu2">Subjects to Teach</a></li>
+	  <li><a data-toggle="tab" href="#menu3">Grades Update</a></li>
+	</ul>
+
+	<div class="tab-content">
+	  <div id="menu1" class="tab-pane fade in active">
+	    <h3>Class Schedules</h3>
+	    <table class="table">
+	    	<tr>
+	    		<th>Subjects</th>
+	    		<th>Block</th>
+	    		<th>Date</th>
+	    		<th>Time</th>
+	    	</tr>
+	    	{% for schedule in instance.schedule_set.all %}
+	    	<tr>
+	    		<td><a href="{% url 'subject:detail' schedule.subject.id %}">{{schedule.subject}}</a></td>
+	    		<td>{{schedule.block}}</td>
+	    		<td>{{schedule.date_start}} - {{schedule.end_date}}</td>
+	    		<td>{{schedule.time_start|date:"f A"}} - {{schedule.time_end|date:"f A"}}</td>
+	    	</tr>
+	    	{% endfor %}
+	    </table>
+	  </div>
+	  <div id="menu2" class="tab-pane fade">
+	    <h3>Subjects</h3>
+	    <table class="table table-hover table-bordered">
+	    	<thead>
+	    		<tr>
+	    			<th>Semister</th>
+	    			<th>Start and End Date</th>
+	    			<th>Subject code</th>
+	    			<th>Descriptive Title</th>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+	    	{% for subject in instance.subject_set.all %}
+	    		<tr>
+	    			<td>{{subject.semister}}</td>
+	    			<td>{{subject.semister.semister_range}}</td>
+	    			<td>{{subject.subject_code}}</td>
+	    			<td>{{subject.descriptive_title|title}}</td>
+	    		</tr>
+	    	{% endfor %}
+	    	</tbody>
+	    </table>
+	    
+
+	    
+	  </div>
+	  <div id="menu3" class="tab-pane fade">
+	    <h3>Menu 3</h3>
+	    <p>Some content in menu 2.</p>
+	  </div>
+	</div>
+</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-sm-12">
+		<a href="{% url 'instructor:instructorindex' %}"><i class="fa fa-arrow-left"></i> Back to instructor's list</a>
+	</div>
+</div>
+{% endblock %}

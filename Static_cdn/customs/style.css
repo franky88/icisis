@@ -1,0 +1,11 @@
+.pix {
+	height: 280px;
+	width: 280px;
+	background-color: teal;
+	padding-top: 100px;
+	margin-bottom: auto;
+}
+.topmargin {
+	margin-top: 1000px;
+	background-color: red;
+}

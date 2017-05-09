@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+	<link rel="stylesheet" href="{% static 'customs/style.css' %}">
+	<style>
+		.affix {
+			top: 30px;
+		}
+	</style>
+	<title>ICI.LOCAL-{{title}}</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">ici.local</a>
+    </div>
+    {% if request.user.is_authenticated %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'student:studentindex' %}">SHS Students</a></li>
+      <li><a href="#">Regular Students</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+		<li><a href="{% url 'main:logout' %}" data-toggle="tooltip" title="Logout?"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	</ul>
+    {% else %}
+      {{empty}}
+    {% endif %} 
+  </div>
+</nav>
+
+<div style="margin-top: 30px;" class="container">
+	{% if not request.user.is_authenticated %}
+	<div class="row">
+		{% block login %}
+		{% endblock %}
+	</div>
+	{% else %}
+	<div class="row">
+		<div class="col-sm-12">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+	
+
+
+
+
+
+
+
+
+
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script>
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip(); 
+	});
+	</script>
+</body>
+</html>

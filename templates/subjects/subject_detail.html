@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>{{title}}</h1>
+<hr>
+<ol class="breadcrumb">
+    <li>
+        <a href="{% url 'subject:subjectindex' %}"><i class="fa fa-book"></i> Subjects</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-file"></i> {{title}}
+    </li>
+</ol>
+<div class="row">
+	<div class="col-sm-12">
+		<div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Subject Code</th>
+						<th>Descriptive Title</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{instance.subject_code|upper}}</td>
+						<td>{{instance.descriptive_title|title}}</td>
+						<td><a class="btn btn-default btn-xs" href="{% url 'subject:edit' instance.id %}"><i class="fa fa-edit"></i> Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="{% url 'subject:subjectindex' %}" class="btn btn-primary btn-xs">Back subject list</a>
+		</div>
+	</div>
+</div>
+<hr>
+
+{% endblock %}

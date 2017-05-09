@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<hr>
+<ol class="breadcrumb">
+    <li>
+        <a href="{% url 'schedule:scheduleindex' %}"><i class="fa fa-fw fa-table"></i> Class Schedule</a>
+    </li>
+    <li class="active">
+    	<i class="fa fa-fw fa-table"></i> {{title}}
+    </li>
+</ol>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="well">
+			<h2>{{instance.subject|title}} | <small>Instructor: {{instance.teacher|title}}</small></h2>
+			<h4><strong>SY: </strong> {{instance.block.course.semister.schoolyear.school_year}} | <strong>Semester: </strong> {{instance.block.course.semister}}</h4>
+			<h4><strong>Block: </strong> {{instance.block|upper}}</h4>
+			<h4>Date start: {{instance.date_start|date:"D d M Y"}} - Date end: {{instance.end_date|date:"D d M Y"}}</h4>
+			<h4>Time start: {{instance.time_start|date:"f A"}} - Time end: {{instance.time_end|date:"f A"}}</h4>
+			<hr>
+			<h4>List of Students</h4>
+			<ol>
+				{% for student in instance.student.all %}
+				<li>{{student.full_name|title}}</li>
+				{% endfor %}
+			</ol>
+			<hr>
+			<a href="{% url 'schedule:scheduleindex' %}" class="btn btn-primary btn-xs"><i class="fa fa-arrow-left"></i> Back Class Schedule</a>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{% endblock %}
