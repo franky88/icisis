@@ -11,7 +11,7 @@ def upload_location(instance, filename):
 class Student(models.Model):
 	lrn_or_id_number = models.CharField(max_length=20, unique=True)
 	first_name = models.CharField(max_length=60)
-	middle_name = models.CharField(max_length=60)
+	middle_name = models.CharField(max_length=60, blank=True)
 	last_name = models.CharField(max_length=60)
 	extension_name = models.CharField(max_length=5, blank=True)
 	department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
