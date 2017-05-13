@@ -134,7 +134,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     )
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join.dirname(os.path.join(BASE_DIR), "media_cdn")
+MEDIA_ROOT = os.path.dirname(os.path.join(BASE_DIR, "media_cdn"))
 
 # 3 party applications
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

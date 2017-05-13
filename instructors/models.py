@@ -3,6 +3,11 @@ from main.models import Department
 from students.models import Student
 
 # Create your models here.
+class EmploymentStatus(models.Model):
+	status = models.CharField(max_length=120)
+	def __str__(self):
+		return self.status
+
 def upload_location(instance, filename):
 	location = "%s/%s"%(instance.id, filename)
 	return location
@@ -21,13 +26,7 @@ class Instructor(models.Model):
 	email_add = models.EmailField()
 	contact_number = models.CharField(max_length=15)
 	adddress = models.TextField()
-	EMP_STATUS = (
-			("Part time", "Part time"),
-			("Full time", "Full time"),
-			("Probetionary", "Probetionary"),
-			("Regular", "Regular"),
-		)
-	employment_status = models.CharField(max_length=13, choices=EMP_STATUS, default="Part time")
+	employment_status = models.ForeignKey(EmploymentStatus, on_delete=models.CASCADE)
 	department = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
 	image = models.ImageField(
 		upload_to=upload_location, 
