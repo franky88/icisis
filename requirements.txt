@@ -2,3 +2,8 @@ Django==1.10.2
 django-crispy-forms==1.6.1
 mod-wsgi==4.4.23+ap24vc14
 Pillow==3.4.2
+Django==1.10.2
+django-crispy-forms==1.6.1
+mod-wsgi==4.4.23+ap24vc14
+Pillow==3.4.2
+psycopg2==2.7.1

@@ -23,7 +23,7 @@ class SchoolYear(models.Model):
 	def __str__(self):
 		return self.school_year()
 
-class Semister(models.Model):
+class Semester(models.Model):
 	schoolyear = models.ForeignKey(SchoolYear, on_delete=models.CASCADE)
 	sems = (
 			("First Semester", "1st Sem"),
@@ -32,12 +32,12 @@ class Semister(models.Model):
 	semister = models.CharField(max_length=15, choices=sems)
 	start_date = models.DateField()
 	end_date = models.DateField()
-	def semister_range(self):
+	def semester_range(self):
 		semrange = "%s - %s"%(self.start_date, self.end_date)
 		return semrange
 
 	def __str__(self):
-		return self.semister
+		return self.semester
 
 class Department(models.Model):
 	department = models.CharField(max_length=120)
@@ -66,7 +66,7 @@ class Strand(models.Model):
 		return self.strand
 
 class Course(models.Model):
-	semister = models.ForeignKey(Semister, on_delete=models.CASCADE)
+	semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
 	department = models.ForeignKey(Department, on_delete=models.CASCADE)
 	course_title = models.CharField(max_length=255)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)

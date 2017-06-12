@@ -5,10 +5,10 @@
 <h2>{{title}}</h2>
 <hr>
 <ol class="breadcrumb">
-    <li class="active">
+    <li class="breadcrumb-item">
         <a href="{% url 'student:studentindex' %}"><i class="fa fa-users" aria-hidden="true"></i> Students</a>
     </li>
-    <li>
+    <li class="breadcrumb-item active">
     	<i class="fa fa-user" aria-hidden="true"></i> {{title}}
     </li>
 </ol>
@@ -16,15 +16,16 @@
 	<div class="col-sm-12">
 		<form action="" method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
-			<h3>{{title}} | <small>Name: {{instance.full_name}}?</small></h3>
+			<h3>{{title}} | <small>Name: {{instance.full_name|title}}</small></h3>
+			<p style="color: red;"><strong>Note: </strong> Marked * is important!</p>
 			<hr>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					{{form|crispy}}	
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Update</button>
-			<a href="{% url 'student:studentindex' %}" type="button" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a>
+			<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-square-o"></i> Update</button>
+			<a class="btn btn-danger btn-sm" type="button" href="{% url 'student:studentindex' %}"><i class="fa fa-times"></i> Cancel</a>
 		</form>
 	</div>
 </div>

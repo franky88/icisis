@@ -5,10 +5,10 @@
 <h1>{{title}}</h1>
 <hr>
 <ol class="breadcrumb">
-    <li>
+    <li class="breadcrumb-item">
         <a href="{% url 'instructor:instructorindex' %}"><i class="fa fa-users"></i> Instructors</a>
     </li>
-    <li class="active">
+    <li class="breadcrumb-item active">
     	<i class="fa fa-user"></i> {{title}}
     </li>
 </ol>
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-sm-9">
-		<h2>Personal Informations</h2>
+		<h2>Instructor's Informations</h2>
 		<hr>
 		<h3><b>{{instance.full_name|title}}</b> <small>ID Number: {{instance.id_number}}</small></h3>
 		<p><b>Birth Date: </b>{{instance.birth_date}}<br>
@@ -33,7 +33,7 @@
 		<b>Contact Number: </b>{{instance.contact_number}}<br>
 		<b>Address: </b>{{instance.adddress|title}}<br>
 		<b>Gender: </b>{{instance.gender}}<br>
-		<b>Employment Status: </b>{{instance.employment_status}}<br>
+		<b>Employment Status: </b>{{instance.employment_status|title}}<br>
 		<b>Department: </b>{{instance.department}}
 		</p>
 		<hr>

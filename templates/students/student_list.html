@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+
+{% block search %}
+<form class="form-inline my-2 my-lg-0" method="GET" action="">
+	<input class="form-control mr-sm-2" name="q" type="text" placeholder="{{searchPlaceholder}}" value="{{ request.GET.q }}">
+	<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+</form>
+{% endblock %}
 {% block content %}
 {% if messages %}
 	<ul class="messages">
@@ -22,76 +29,40 @@
 <hr>
 <a class="btn btn-success" href="{% url 'student:addstudent' %}"><i class="fa fa-plus"></i> add student</a>
 <hr>
+{% for student in studentlist %}
 <div class="row">
-	<div class="col-sm-12">
-		<div class="btn-group btn-group-justified" role="group" aria-label="Student Filters">
-		  <a type="button" class="btn btn-default">All</a>
-		  <a type="button" class="btn btn-default">Registered</a>
-		  <a type="button" class="btn btn-default">Enrolled</a>
-		  <a type="button" class="btn btn-default">Grade 11</a>
-		  <a type="button" class="btn btn-default">Grade 12</a>
-		  <a type="button" class="btn btn-default">Male</a>
-		  <a type="button" class="btn btn-default">Female</a>
-		</div>
+	<div class="col-sm-2">
+		{% if student.image %}
+			<img style="width: 100%; height: auto;" src="{{ student.image.url }}" alt="" class="img-thumbnail img-responsive img-circle">
+		{% else %}
+			<i class="fa fa-fw fa-user"></i>
+		{% endif %}
+	</div>
+	<div class="col-sm-10">
+		<h4>Personal information</h4>
+		<hr>
+		<h5><a href="{% url 'student:detail' student.id %}">{{student.full_name|title}}</a> | <small>LRN: {{student.lrn_or_id_number}}</small></h5>
+		<small>Date registered: {{student.timestamp}}</small><br>
+		<hr>
+		<a href="{% url 'student:edit' student.id %}" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Edit</a> |
+		<a href="{% url 'student:detail' student.pk %}" class="btn btn-primary btn-sm"><i class="fa fa-user"></i> Details</a>
 	</div>
 </div>
 <hr>
-<form class="form">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Search student">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
-<hr>
-<div class="row">
-	<div class="col-sm-12">
-		<!-- <div class="well"> -->
-			
-				<div class="row">
-					<div class="col-sm-12">
-						<table class="table table-bordered">
-							{% for student in studentlist %}
-							<tr>
-								<td rowspan="2">
-									<div class="text-center">
-										<a href="{% url 'student:detail' student.id %}">
-										{% if student.image %}
-											<img style="width: 80px; height: 80px;" src="{{ student.image.url }}" alt="" class="img-thumbnail img-responsive img-circle">
-										{% else %}
-											<i class="fa fa-fw fa-user"></i>
-										{% endif %}
-										</a>
-									</div>
-								</td>
-								<th>Name</th>
-								<th>LRN/ID number</th>
-								<th>Date registered</th>
-								<th>Actions</th>
-							</tr>
-							<tr>
-								<td><h4><a href="{% url 'student:detail' student.id %}">{{student.full_name|title}}</a></h4></td>
-								<td>{{student.lrn_or_id_number}}</td>
-								<td>{{student.timestamp}}</td>
-								<td>
-									<a href="{% url 'student:edit' student.id %}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a> |
-									<a href="{% url 'student:detail' student.pk %}" class="btn btn-primary btn-xs"><i class="fa fa-user"></i> Details</a>
-								</td>
-							</tr>
-							{% endfor %}
-						</table>
+{% endfor %}
 
-					</div>
-				</div>
-
-			
-		<!-- </div> -->
-		
-	</div>
+<div class="pagination">
+	<span class="step-links">
+		{% if studentlist.has_previous %}
+			<a type="button" class="btn btn-secondary btn-sm" href="?page={{studentlist.previous_page_number}}"> <i class="fa fa-arrow-left"></i> </a>
+		{% endif %}
+	</span>
+	<span class="current">
+		&nbsp Page {{studentlist.number}} of {{studentlist.paginator.num_pages}}. &nbsp
+	</span>
+	{% if studentlist.has_next %}
+		<a type="button" class="btn btn-secondary btn-sm" href="?page={{studentlist.next_page_number}}"> <i class="fa fa-arrow-right"></i> </a>
+	{% endif %}
 </div>
-
 
 {% endblock %}

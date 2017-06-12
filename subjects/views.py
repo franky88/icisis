@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import SubjectForm
 from .models import Subject
@@ -6,9 +7,16 @@ from .models import Subject
 @login_required
 def subjectIndex(request):
 	subject_list = Subject.objects.all().order_by('-id')
+	query = request.GET.get("q")
+	if query:
+		subject_list = subject_list.filter(
+			Q(subject_code__icontains=query) |
+			Q(descriptive_title__icontains=query) 
+			).distinct()
 	context = {
 		"title": "Subjects List",
-		"subjectlist": subject_list
+		"subjectlist": subject_list, 
+		"searchPlaceHolder": "Search subjects",
 	}
 	return render(request, "subjects/subject_home.html", context)
 

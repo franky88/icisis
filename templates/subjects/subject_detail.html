@@ -6,10 +6,10 @@
 <h1>{{title}}</h1>
 <hr>
 <ol class="breadcrumb">
-    <li>
+    <li class="breadcrumb-item">
         <a href="{% url 'subject:subjectindex' %}"><i class="fa fa-book"></i> Subjects</a>
     </li>
-    <li class="active">
+    <li class="breadcrumb-item active">
         <i class="fa fa-file"></i> {{title}}
     </li>
 </ol>
@@ -21,6 +21,8 @@
 					<tr>
 						<th>Subject Code</th>
 						<th>Descriptive Title</th>
+						<th>Units</th>
+						<th>Hours</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -28,11 +30,13 @@
 					<tr>
 						<td>{{instance.subject_code|upper}}</td>
 						<td>{{instance.descriptive_title|title}}</td>
-						<td><a class="btn btn-default btn-xs" href="{% url 'subject:edit' instance.id %}"><i class="fa fa-edit"></i> Edit</a></td>
+						<td>{{instance.units}}</td>
+						<td>{{instance.hours}}</td>
+						<td><a class="btn btn-secondary btn-sm" href="{% url 'subject:edit' instance.id %}"><i class="fa fa-edit"></i> Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
-			<a href="{% url 'subject:subjectindex' %}" class="btn btn-primary btn-xs">Back subject list</a>
+			<a href="{% url 'subject:subjectindex' %}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Back subject list</a>
 		</div>
 	</div>
 </div>

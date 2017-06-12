@@ -5,7 +5,6 @@ class InstructorForm(forms.ModelForm):
 	class Meta:
 		model = Instructor
 		fields = [
-			"id_number",
 			"first_name",
 			"middle_name",
 			"last_name",

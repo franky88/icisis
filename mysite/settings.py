@@ -85,8 +85,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'icisis',
+        'USER': 'dbadmin',
+        'PASSWORD': 'partz381',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -137,4 +141,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.dirname(os.path.join(BASE_DIR, "media_cdn"))
 
 # 3 party applications
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

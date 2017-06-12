@@ -7,5 +7,7 @@ class SubjectForm(forms.ModelForm):
 		fields = [
 			'subject_code',
 			'descriptive_title',
+			'units',
+			'hours',
 			'subject_fee',
 		]

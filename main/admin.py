@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SchoolYear, Semister, Track, Strand, Department, Course, SideNav
+from .models import SchoolYear, Semester, Track, Strand, Department, Course, SideNav
 # Register your models here.
 
 
@@ -7,7 +7,7 @@ from .models import SchoolYear, Semister, Track, Strand, Department, Course, Sid
 
 admin.site.register(SideNav)
 admin.site.register(SchoolYear)
-admin.site.register(Semister)
+admin.site.register(Semester)
 admin.site.register(Track)
 admin.site.register(Strand)
 admin.site.register(Department)
